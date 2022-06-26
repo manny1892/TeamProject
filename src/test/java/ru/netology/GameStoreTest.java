@@ -27,11 +27,13 @@ public class GameStoreTest {
 
         GameStore store = new GameStore();
 
-        store.addPlayTime("Alex", 2);
+        store.addPlayTime("Alex", 3);
+        store.addPlayTime("Joker", 9);
+        store.addPlayTime("Mike", 6);
 
 
         String actual = store.getMostPlayer();
-        String expected = "Alex";
+        String expected = "Joker";
         assertEquals(expected, actual);
     }
 
