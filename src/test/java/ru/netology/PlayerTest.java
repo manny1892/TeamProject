@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class PlayerTest {
 
     @Test
-    public void shouldSumGenreIfOneGame() {
+    public void shouldSumGenreIfOneGame() { //++++++++++++++++++++
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
 
@@ -23,7 +23,7 @@ public class PlayerTest {
     // другие ваши тесты
 
     @Test
-    public void shouldCheckOnPlayWithoutInstall() {
+    public void shouldCheckOnPlayWithoutInstall() { //+++++++++++++++++
         GameStore store = new GameStore();
         Game game = store.publishGame("Баттл", "Аркады");
         Game game2 = store.publishGame("KKKK", "Аркады");
@@ -31,25 +31,22 @@ public class PlayerTest {
         Player player = new Player("Alex");
 
         player.play(game, 1);
-        player.play(game, 3);
+        player.play(game2, 3);
 
-        int expected = 4;
-        int actual = player.sumGenre("Аркады");
-        assertEquals(expected, actual);
+        assertThrows(RuntimeException.class, () -> player.sumGenre("Аркады"));
     }
 
     @Test
-    public void shouldCheckPlayToSumHoursSameGame() {
+    public void shouldCheckPlayToSumHoursSameGenreGames() { //+++++++++++++++++++++++
         GameStore store = new GameStore();
         Game game = store.publishGame("Баттл", "Аркады");
         Game game2 = store.publishGame("KKKK", "Аркады");
 
         Player player = new Player("Alex");
         player.installGame(game);
+        player.installGame(game2);
         player.play(game, 1);
-        player.play(game, 3);
-
-        player.sumGenre("Аркады");
+        player.play(game2, 3);
 
         int expected = 4;
         int actual = player.sumGenre("Аркады");
@@ -57,7 +54,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void shouldCheckPlayOnExceptions() {
+    public void shouldCheckPlayOnExceptions() {  //+++++++++++++++++++++++
         GameStore store = new GameStore();
         Game game = store.publishGame("Баттл", "Аркады");
         Game game2 = store.publishGame("Баттл", "Аркады");
@@ -71,7 +68,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void shouldInstallGame() {
+    public void shouldInstallGame() {  //  ++++++++++++++++++++++++++++++++++++
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
 
@@ -87,7 +84,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void mostPlayerByGenre() {
+    public void mostPlayerByGenre() { //++++++++++++++++++++++++++++++
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
         Game game2 = store.publishGame("KKKK", "Аркады");
@@ -95,9 +92,8 @@ public class PlayerTest {
         Player player = new Player("Petya");
         player.installGame(game);
         player.installGame(game2);
-        player.play(game, 3);
         player.play(game, 5);
-
+        player.play(game2, 3);
 
         Game expected = player.mostPlayerByGenre("Аркады");
         String actual = game.getTitle();
