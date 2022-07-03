@@ -26,14 +26,10 @@ public class PlayerTest {
     public void shouldCheckOnPlayWithoutInstall() { //+++++++++++++++++
         GameStore store = new GameStore();
         Game game = store.publishGame("Баттл", "Аркады");
-        Game game2 = store.publishGame("KKKK", "Аркады");
 
         Player player = new Player("Alex");
 
-        player.play(game, 1);
-        player.play(game2, 3);
-
-        assertThrows(RuntimeException.class, () -> player.sumGenre("Аркады"));
+        assertThrows(RuntimeException.class, () -> player.play(game, 2));
     }
 
     @Test
@@ -57,7 +53,7 @@ public class PlayerTest {
     public void shouldCheckPlayOnExceptions() {  //+++++++++++++++++++++++
         GameStore store = new GameStore();
         Game game = store.publishGame("Баттл", "Аркады");
-        Game game2 = store.publishGame("Баттл", "Аркады");
+        Game game2 = store.publishGame("Бат", "Аркады");
 
         Player player = new Player("Alex");
 
