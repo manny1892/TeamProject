@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class PlayerTest {
 
-    @Test @Disabled
+    @Test
     public void shouldSumGenreIfOneGame() {
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
