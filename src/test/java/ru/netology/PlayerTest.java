@@ -21,6 +21,21 @@ public class PlayerTest {
     }
 
     // другие ваши тесты
+    @Test
+    public void shouldSumGenreIfPlayTimeZero() { //++++++++++++++++++++
+        GameStore store = new GameStore();
+        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        Game game2 = store.publishGame("Баттл", "Аркады");
+
+        Player player = new Player("Petya");
+        player.installGame(game);
+        player.installGame(game2);
+        player.play(game, 0);
+        player.play(game2, 0);
+        int expected = 0;
+        int actual = player.sumGenre(game.getGenre());
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void shouldCheckOnPlayWithoutInstall() { //+++++++++++++++++
@@ -93,6 +108,22 @@ public class PlayerTest {
 
         String expected = player.mostPlayerByGenre("Аркады");
         String actual = game.getTitle();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void mostPlayerByGenreWithMinesTimeAndDifGenre() { //++++++++++++++++++++++++++++++
+        GameStore store = new GameStore();
+        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        Game game2 = store.publishGame("KKKK", "Аркады");
+
+        Player player = new Player("Petya");
+        player.installGame(game);
+        player.play(game, -4);
+
+        String expected = player.mostPlayerByGenre("Гонки");
+        String actual = null;
 
         assertEquals(expected, actual);
     }
